@@ -31,7 +31,7 @@ const BtnBox = styled.div`
 `;
 
 const CurrentDate = styled.h1`
-	color: var(--primary-color-700);
+	color: var(--primary-color-800);
 `;
 
 const ControlDate = () => {

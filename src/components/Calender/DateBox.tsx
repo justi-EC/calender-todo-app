@@ -3,6 +3,7 @@ import WeekBox from './WeekBox';
 import AllDay from './AllDay';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
+import { weekNames } from './Today';
 
 const Container = styled.div`
 	width: 100%;
@@ -40,11 +41,10 @@ const DateBox = () => {
 	const nowDate = useSelector((state: RootState) => state.date.now);
 
 	const allDay: Date[] = monthList(nowDate);
-	const weeks = ['일', '월', '화', '수', '목', '금', '토'];
 
 	return (
 		<Container>
-			{weeks.map((week) => {
+			{weekNames.map((week) => {
 				return <WeekBox key={week} weekName={week} />;
 			})}
 			{allDay.map((day: Date) => {

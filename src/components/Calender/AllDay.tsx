@@ -31,7 +31,7 @@ const Container = styled.div<ContainerProps>`
 			sameDay
 				? css`
 						font-weight: bold;
-						color: var(--primary-color-700);
+						color: var(--primary-color-800);
 				  `
 				: css``}
 		${({ clickDay }) =>

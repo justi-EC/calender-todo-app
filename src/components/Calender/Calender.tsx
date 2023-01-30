@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux';
 import { modalActions } from '../../store/modalSlice';
 
 const Container = styled.div`
-	width: 700px;
+	width: 600px;
 	height: 700px;
 	position: absolute;
 	top: 50%;

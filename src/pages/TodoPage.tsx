@@ -1,28 +1,39 @@
-import { ToDoHeader, ToDoTitle, IconButton } from '../style/mainStyle';
+import {
+	ToDoHeader,
+	ToDoTitle,
+	IconButton,
+	Day,
+	MonthDate,
+} from '../style/mainStyle';
 import { Menu } from '@styled-icons/boxicons-regular/Menu';
 import { useState, useEffect } from 'react';
 import MenuNav from './MenuNav';
 import ToDoCreate from '../components/TodoList/ToDoCreate';
-import { appFireStore } from '../firebase/config';
+import { appAuth, appFireStore } from '../firebase/config';
 import TodoList from './TodoList';
 import { DocumentData, collection, getDocs } from 'firebase/firestore';
 import Calender from '../components/Calender/Calender';
-import useLogout from '../hooks/useLogout';
 import { useNavigate } from 'react-router';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store';
+import { signOut } from 'firebase/auth';
+import { authActions } from '../store/authSlice';
+import { useDispatch } from 'react-redux';
+import { todayDate, todayMonth, todayWeek } from '../components/Calender/Today';
 
 const TodoPage = () => {
 	const [isMenuToggled, setIsMenuToggled] = useState(false);
-	const { logout } = useLogout();
+	const [documents, setDocuments] = useState<DocumentData>();
+
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
+
 	const calModalState = useSelector(
 		(state: RootState) => state.handleModal.cal
 	);
 	const listModalState = useSelector(
 		(state: RootState) => state.handleModal.list
 	);
-	const [documents, setDocuments] = useState<DocumentData>();
 
 	const transaction = 'Todos';
 
@@ -30,9 +41,14 @@ const TodoPage = () => {
 		setIsMenuToggled(!isMenuToggled);
 	};
 
-	const handleLogOut = () => {
-		logout();
-		navigate('/');
+	const handleLogOut = async () => {
+		try {
+			const res = await signOut(appAuth);
+			dispatch(authActions.logout());
+			navigate('/');
+		} catch (error: any) {
+			throw new Error('로그아웃에 실패했습니다.');
+		}
 	};
 
 	const getData = async () => {
@@ -45,8 +61,6 @@ const TodoPage = () => {
 		getData();
 	}, [listModalState]);
 
-	console.log(documents);
-
 	return (
 		<>
 			<ToDoHeader>
@@ -55,7 +69,11 @@ const TodoPage = () => {
 					<Menu width={80} height={80} />
 				</IconButton>
 			</ToDoHeader>
-
+			<Day>{todayWeek}요일</Day>
+			<MonthDate>
+				{todayMonth}&nbsp;
+				{todayDate}일
+			</MonthDate>
 			{documents &&
 				documents.map((item: DocumentData, index: number) => {
 					return (

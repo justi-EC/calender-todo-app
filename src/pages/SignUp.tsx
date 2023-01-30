@@ -93,7 +93,7 @@ const SignUp = () => {
 							onChange={handleNickName}
 							validProps={isNickNameValid}
 							isActive={{ emptyEmail, emptyPwd, emptyNickName }}
-							placeholder="두 글자 이상"
+							placeholder="2글자 이상"
 						/>
 
 						<Label htmlFor="email">이메일 주소</Label>
