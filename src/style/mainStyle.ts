@@ -29,6 +29,7 @@ const UserName = styled.strong`
 
 const WelcomeText = styled.div`
 	margin-left: 1.8rem;
+	margin-bottom: 2rem;
 	font-size: 2rem;
 	color: rgb(195, 195, 195);
 `;

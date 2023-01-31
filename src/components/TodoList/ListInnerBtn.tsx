@@ -8,29 +8,28 @@ import ToDoEdit from './ToDoEdit';
 
 const EditBtnWrapper = styled.div`
 	display: flex;
-	justify-content: flex-end;
-	margin-top: 20px;
+	position: relative;
+	left: 50rem;
+	margin-bottom: 2rem;
+`;
+
+const DateBackGround = styled.div`
+	color: var(--primary-color-700);
 `;
 
 const BtnBackGround = styled.div`
-	// border: 1px solid blue;
 	width: 40px;
 	height: 40px;
 	margin-left: 10px;
 	text-align: center;
-	border-radius: 50%;
+	color: darkgray;
 	&:hover {
-		background-color: #f6f6f6;
+		color: var(--primary-color-700);
 		cursor: pointer;
 	}
 `;
 
-const ListInnerBtn = ({
-	contentId,
-	title,
-	content,
-	createdTime,
-}: DocumentData) => {
+const ListInnerBtn = ({ contentId, createdTime }: DocumentData) => {
 	const [open, setOpen] = useState(false);
 	const [editOpen, setEditOpen] = useState(false);
 	const dispatch = useDispatch();
@@ -58,19 +57,16 @@ const ListInnerBtn = ({
 	return (
 		<>
 			<EditBtnWrapper>
-				<div>{`${new Date(createdTime.seconds * 1000)}`.slice(0, 15)}</div>
+				<DateBackGround>
+					{`${new Date(createdTime.seconds * 1000)}`.slice(0, 15)}
+				</DateBackGround>
 				<BtnBackGround onClick={handleEditOpen}>수정</BtnBackGround>
 				<BtnBackGround onClick={handleClickOpen}>삭제</BtnBackGround>
 				{open === true ? (
 					<ToDoDelete onClose={handleClose} contentId={contentId} />
 				) : null}
 				{editOpen === true ? (
-					<ToDoEdit
-						onClose={handleEditClose}
-						contentId={contentId}
-						title={title}
-						content={content}
-					/>
+					<ToDoEdit onClose={handleEditClose} contentId={contentId} />
 				) : null}
 			</EditBtnWrapper>
 		</>

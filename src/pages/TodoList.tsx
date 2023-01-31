@@ -5,7 +5,7 @@ import ListInnerBtn from '../components/TodoList/ListInnerBtn';
 
 const Container = styled.div`
 	max-width: 1200px;
-	margin: 1rem;
+	margin: 0.3rem;
 	border: 1px solid lightgray;
 	border-radius: 20px;
 	padding: 1em;
@@ -42,8 +42,7 @@ const ToDoList = ({ title, content, contentId, createdTime }: DocumentData) => {
 	const parentRef = useRef<HTMLDivElement>(null);
 	const childRef = useRef<HTMLDivElement>(null);
 
-	const handleButtonClick = (e: React.MouseEvent<HTMLHeadingElement>) => {
-		e.stopPropagation();
+	const handleButtonClick = () => {
 		if (parentRef.current === null || childRef.current === null) {
 			return;
 		}
@@ -56,18 +55,15 @@ const ToDoList = ({ title, content, contentId, createdTime }: DocumentData) => {
 	};
 
 	return (
-		<Container onClick={handleButtonClick}>
-			<HeaderTitle onClick={handleButtonClick}>{title}</HeaderTitle>
-			<ContentsWrapper ref={parentRef}>
-				<Contents ref={childRef}>{content}</Contents>
-			</ContentsWrapper>
-			<ListInnerBtn
-				contentId={contentId}
-				title={title}
-				content={content}
-				createdTime={createdTime}
-			/>
-		</Container>
+		<>
+			<Container onClick={handleButtonClick}>
+				<HeaderTitle>{title}</HeaderTitle>
+				<ContentsWrapper ref={parentRef}>
+					<Contents ref={childRef}>{content}</Contents>
+				</ContentsWrapper>
+			</Container>
+			<ListInnerBtn contentId={contentId} createdTime={createdTime} />
+		</>
 	);
 };
 

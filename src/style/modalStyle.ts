@@ -37,7 +37,7 @@ const Button = styled.button`
 
 const Content = styled.textarea`
 	width: 100%;
-	height: 28vh;
+	height: 50%;
 	padding: 0.4rem;
 	margin: 0.5rem 0 0.5rem 0;
 	box-sizing: border-box;

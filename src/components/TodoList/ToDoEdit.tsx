@@ -10,7 +10,7 @@ import ReactDOM from 'react-dom';
 import Backdrop from '../Modal/Backdrop';
 import ModalOverlay from '../Modal/ModalOverlay';
 import { Xmark } from '@styled-icons/fa-solid';
-import { Subtitle } from '../../style/authStyle';
+import { HelperText, Subtitle } from '../../style/authStyle';
 import { useState } from 'react';
 import useFireStore from '../../hooks/useFireStore';
 
@@ -19,15 +19,13 @@ const portalElement = document.getElementById('overlays') as HTMLElement;
 interface Props {
 	onClose: () => void;
 	contentId: string;
-	title: string;
-	content: string;
 }
 
-const ToDoEdit = ({ onClose, contentId, title, content }: Props) => {
+const ToDoEdit = ({ onClose, contentId }: Props) => {
 	const { updateDocument } = useFireStore('Todos');
 	const [todoData, setTodoData] = useState({
-		title: title,
-		content: content,
+		title: '',
+		content: '',
 	});
 	const [isFailed, setIsFailed] = useState({
 		checkTitle: false,
@@ -55,7 +53,7 @@ const ToDoEdit = ({ onClose, contentId, title, content }: Props) => {
 				...isFailed,
 				checkContent: true,
 			});
-		} else {
+		} else if (todoData.title.length > 0 && todoData.content.length > 0) {
 			updateDocument(contentId, todoData);
 			onClose();
 		}
@@ -81,6 +79,13 @@ const ToDoEdit = ({ onClose, contentId, title, content }: Props) => {
 						/>
 						<LabelTitle htmlFor="title">내용</LabelTitle>
 						<Content id="textarea" name="content" onChange={handleEditTodo} />
+						<HelperText isWrong={isFailed.checkTitle}>
+							제목을 입력해주세요.
+						</HelperText>
+						<HelperText isWrong={isFailed.checkContent}>
+							내용을 입력해주세요.
+						</HelperText>
+
 						<Button type="submit" onClick={submitToDo}>
 							확인
 						</Button>

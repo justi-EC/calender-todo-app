@@ -5,7 +5,7 @@ interface Props {
 }
 
 const Container = styled.div`
-	background-color: var(--primary-color-800)
+	background-color: var(--primary-color-700);
 	border: none;
 	display: flex;
 	justify-content: center;
