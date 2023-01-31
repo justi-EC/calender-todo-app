@@ -45,15 +45,17 @@ const ToDoEdit = ({ onClose, contentId }: Props) => {
 		e.preventDefault();
 		if (todoData.title.length <= 0) {
 			setIsFailed({
-				...isFailed,
 				checkTitle: true,
+				checkContent: false,
 			});
+			console.log(isFailed);
 		} else if (todoData.content.length <= 0) {
 			setIsFailed({
-				...isFailed,
+				checkTitle: false,
 				checkContent: true,
 			});
-		} else if (todoData.title.length > 0 && todoData.content.length > 0) {
+			console.log(isFailed);
+		} else {
 			updateDocument(contentId, todoData);
 			onClose();
 		}
