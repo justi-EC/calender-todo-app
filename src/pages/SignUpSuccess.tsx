@@ -1,4 +1,3 @@
-import React from 'react';
 import { Container, Subtitle, ChangePageText } from '../style/authStyle';
 import { Link } from 'react-router-dom';
 

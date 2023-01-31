@@ -2,16 +2,25 @@ import {
 	ToDoHeader,
 	ToDoTitle,
 	IconButton,
-	Day,
-	MonthDate,
+	UserName,
+	WelcomeText,
 } from '../style/mainStyle';
 import { Menu } from '@styled-icons/boxicons-regular/Menu';
 import { useState, useEffect } from 'react';
 import MenuNav from './MenuNav';
 import ToDoCreate from '../components/TodoList/ToDoCreate';
 import { appAuth, appFireStore } from '../firebase/config';
-import TodoList from './TodoList';
-import { DocumentData, collection, getDocs } from 'firebase/firestore';
+import TodoList from './ToDoList';
+import {
+	DocumentData,
+	Query,
+	WhereFilterOp,
+	collection,
+	getDocs,
+	orderBy,
+	query,
+	where,
+} from 'firebase/firestore';
 import Calender from '../components/Calender/Calender';
 import { useNavigate } from 'react-router';
 import { useSelector } from 'react-redux';
@@ -19,9 +28,8 @@ import { RootState } from '../store';
 import { signOut } from 'firebase/auth';
 import { authActions } from '../store/authSlice';
 import { useDispatch } from 'react-redux';
-import { todayDate, todayMonth, todayWeek } from '../components/Calender/Today';
 
-const TodoPage = () => {
+const ToDoPage = () => {
 	const [isMenuToggled, setIsMenuToggled] = useState(false);
 	const [documents, setDocuments] = useState<DocumentData>();
 
@@ -31,11 +39,17 @@ const TodoPage = () => {
 	const calModalState = useSelector(
 		(state: RootState) => state.handleModal.cal
 	);
-	const listModalState = useSelector(
-		(state: RootState) => state.handleModal.list
+	const createModalState = useSelector(
+		(state: RootState) => state.handleModal.create
 	);
-
-	const transaction = 'Todos';
+	const editModalState = useSelector(
+		(state: RootState) => state.handleModal.edit
+	);
+	const deleteModalState = useSelector(
+		(state: RootState) => state.handleModal.delete
+	);
+	const userName = useSelector((state: RootState) => state.auth.userName);
+	const user = useSelector((state: RootState) => state.auth.user);
 
 	const toggleMenu = () => {
 		setIsMenuToggled(!isMenuToggled);
@@ -43,7 +57,7 @@ const TodoPage = () => {
 
 	const handleLogOut = async () => {
 		try {
-			const res = await signOut(appAuth);
+			await signOut(appAuth);
 			dispatch(authActions.logout());
 			navigate('/');
 		} catch (error: any) {
@@ -51,43 +65,61 @@ const TodoPage = () => {
 		}
 	};
 
+	type QueryType = [string, WhereFilterOp, string];
+
+	const userId = user!.uid;
+	const myQuery: QueryType = ['userId', '==', userId];
+
 	const getData = async () => {
-		const res = await getDocs(collection(appFireStore, transaction));
-		const newData = res.docs.map((doc) => doc.data());
-		setDocuments(newData);
+		const q: Query<DocumentData> = query(
+			collection(appFireStore, 'Todos'),
+			where(...myQuery),
+			orderBy('createdTime', 'desc')
+		);
+		const res = await getDocs(q);
+		let result: DocumentData = [];
+		res.docs.forEach((doc) => {
+			result.push({ ...doc.data(), id: doc.id });
+		});
+		setDocuments(result);
 	};
 
 	useEffect(() => {
 		getData();
-	}, [listModalState]);
+	}, [calModalState, createModalState, editModalState, deleteModalState]);
 
 	return (
 		<>
 			<ToDoHeader>
 				<ToDoTitle>나의 할 일</ToDoTitle>
+
 				<IconButton onClick={toggleMenu}>
 					<Menu width={80} height={80} />
 				</IconButton>
 			</ToDoHeader>
-			<Day>{todayWeek}요일</Day>
-			<MonthDate>
-				{todayMonth}&nbsp;
-				{todayDate}일
-			</MonthDate>
+			<UserName>{userName}님</UserName>
+			<WelcomeText>반갑습니다!</WelcomeText>
+
 			{documents &&
 				documents.map((item: DocumentData, index: number) => {
 					return (
-						<TodoList key={index} title={item.title} content={item.content} />
+						<TodoList
+							key={index}
+							title={item.title}
+							content={item.content}
+							contentId={item.id}
+							createdTime={item.createdTime}
+						/>
 					);
 				})}
 
 			{!isMenuToggled && <MenuNav toggle={toggleMenu} logout={handleLogOut} />}
 
-			{listModalState && <ToDoCreate />}
+			{createModalState && <ToDoCreate />}
 
 			{calModalState && <Calender />}
 		</>
 	);
 };
 
-export default TodoPage;
+export default ToDoPage;

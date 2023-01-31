@@ -2,22 +2,20 @@ import { useDispatch } from 'react-redux';
 import { fireStoreActions } from '../store/fireStoreSlice';
 import { appFireStore, timestamp } from '../firebase/config';
 import {
+	DocumentData,
 	addDoc,
 	collection,
 	deleteDoc,
 	doc,
 	updateDoc,
 } from 'firebase/firestore';
-import { useSelector } from 'react-redux';
-import { RootState } from '../store';
 
 const useFireStore = (transaction: string) => {
-	const response = useSelector((state: RootState) => state.auth.user);
 	const dispatch = useDispatch();
 
 	const colRef = collection(appFireStore, transaction);
 
-	const addDocument = async (doc: object) => {
+	const addDocument = async (doc: DocumentData) => {
 		dispatch(fireStoreActions.isPending());
 		try {
 			const createdTime = timestamp.fromDate(new Date());
@@ -47,7 +45,7 @@ const useFireStore = (transaction: string) => {
 			dispatch(fireStoreActions.error(error.message));
 		}
 	};
-	return { addDocument, delDocument, updateDocument, response };
+	return { addDocument, delDocument, updateDocument };
 };
 
 export default useFireStore;

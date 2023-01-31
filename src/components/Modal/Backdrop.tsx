@@ -1,7 +1,4 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { modalActions } from '../../store/modalSlice';
 
 const BackdropStyle = styled.div`
 	position: fixed;
@@ -14,13 +11,7 @@ const BackdropStyle = styled.div`
 `;
 
 const Backdrop = () => {
-	const dispatch = useDispatch();
-
-	const handleClose = () => {
-		dispatch(modalActions.handleCalModal(false));
-		dispatch(modalActions.handleListModal(false));
-	};
-	return <BackdropStyle onClick={handleClose} />;
+	return <BackdropStyle />;
 };
 
 export default Backdrop;

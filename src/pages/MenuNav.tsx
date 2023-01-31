@@ -66,7 +66,7 @@ const MenuNav = ({ toggle, logout }: Props) => {
 			<XmarkIcon onClick={toggle}>
 				<Xmark width={40} height={40} />
 			</XmarkIcon>
-			<NavItem onClick={() => dispatch(modalActions.handleListModal(true))}>
+			<NavItem onClick={() => dispatch(modalActions.handleCreateModal(true))}>
 				새 리스트 작성
 			</NavItem>
 			<NavItem onClick={() => dispatch(modalActions.handleCalModal(true))}>

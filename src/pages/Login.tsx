@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Visibility } from '@styled-icons/material-outlined/Visibility';
 import { VisibilityOff } from '@styled-icons/material/VisibilityOff';
 import { Link, useNavigate } from 'react-router-dom';
@@ -58,6 +58,7 @@ const Login = () => {
 		try {
 			const res = await signInWithEmailAndPassword(appAuth, email, password);
 			const user = res.user;
+			dispatch(authActions.userName(user.displayName));
 			dispatch(authActions.login(user));
 			navigate('/todopage');
 		} catch (error: any) {

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { DocumentData } from 'firebase/firestore';
 import { useRef, useState } from 'react';
+import ListInnerBtn from '../components/TodoList/ListInnerBtn';
 
 const Container = styled.div`
 	max-width: 1200px;
@@ -36,7 +37,7 @@ const ContentsWrapper = styled.div`
 	transition: height 0.35s ease;
 `;
 
-const TodoList = ({ title, content }: DocumentData) => {
+const ToDoList = ({ title, content, contentId, createdTime }: DocumentData) => {
 	const [isCollapse, setIsCollapse] = useState(false);
 	const parentRef = useRef<HTMLDivElement>(null);
 	const childRef = useRef<HTMLDivElement>(null);
@@ -60,8 +61,14 @@ const TodoList = ({ title, content }: DocumentData) => {
 			<ContentsWrapper ref={parentRef}>
 				<Contents ref={childRef}>{content}</Contents>
 			</ContentsWrapper>
+			<ListInnerBtn
+				contentId={contentId}
+				title={title}
+				content={content}
+				createdTime={createdTime}
+			/>
 		</Container>
 	);
 };
 
-export default TodoList;
+export default ToDoList;

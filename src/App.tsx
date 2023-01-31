@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import SignUp from './pages/SignUp';
 import Login from './pages/Login';
-import TodoPage from './pages/TodoPage';
+import TodoPage from './pages/ToDoPage';
 import SignUpSuccess from './pages/SignUpSuccess';
 
 function App() {

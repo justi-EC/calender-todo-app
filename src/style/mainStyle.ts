@@ -21,16 +21,16 @@ const IconButton = styled.button`
 	cursor: pointer;
 `;
 
-const Day = styled.strong`
+const UserName = styled.strong`
 	margin-left: 1.8rem;
 	font-size: 2.5rem;
 	color: #9d9c9cec;
 `;
 
-const MonthDate = styled.div`
+const WelcomeText = styled.div`
 	margin-left: 1.8rem;
-	font-size: 1.3rem;
+	font-size: 2rem;
 	color: rgb(195, 195, 195);
 `;
 
-export { ToDoHeader, ToDoTitle, IconButton, Day, MonthDate };
+export { ToDoHeader, ToDoTitle, IconButton, UserName, WelcomeText };
