@@ -1,16 +1,9 @@
-import {
-	Container,
-	CloseButton,
-	Button,
-	LabelTitle,
-	InputTitle,
-	Content,
-} from '../../style/modalStyle';
+import { Container } from '../../style/modalStyle';
 import ReactDOM from 'react-dom';
 import Backdrop from '../Modal/Backdrop';
 import ModalOverlay from '../Modal/ModalOverlay';
 import { Xmark } from '@styled-icons/fa-solid';
-import { HelperText, Subtitle } from '../../style/authStyle';
+import { HelperText } from '../../style/authStyle';
 import { useState } from 'react';
 import useFireStore from '../../hooks/useFireStore';
 
@@ -65,20 +58,20 @@ const ToDoEdit = ({ onClose, contentId }: Props) => {
 			{ReactDOM.createPortal(
 				<ModalOverlay>
 					<Container>
-						<CloseButton onClick={onClose}>
+						<button onClick={onClose}>
 							<Xmark width={40} height={40} />
-						</CloseButton>
+						</button>
 						{/* 아이콘 */}
-						<Subtitle>내용 수정하기</Subtitle>
-						<LabelTitle htmlFor="title">제목</LabelTitle>
-						<InputTitle
+						<div>내용 수정하기</div>
+						<label htmlFor="title">제목</label>
+						<input
 							type="text"
 							id="name"
 							name="title"
 							onChange={handleEditTodo}
 						/>
-						<LabelTitle htmlFor="title">내용</LabelTitle>
-						<Content id="textarea" name="content" onChange={handleEditTodo} />
+						<label htmlFor="title">내용</label>
+						<textarea id="textarea" name="content" onChange={handleEditTodo} />
 						<HelperText isWrong={isFailed.checkTitle}>
 							제목을 입력해주세요.
 						</HelperText>
@@ -86,9 +79,9 @@ const ToDoEdit = ({ onClose, contentId }: Props) => {
 							내용을 입력해주세요.
 						</HelperText>
 
-						<Button type="submit" onClick={submitToDo}>
+						<button type="submit" onClick={submitToDo}>
 							확인
-						</Button>
+						</button>
 					</Container>
 				</ModalOverlay>,
 				portalElement
