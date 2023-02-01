@@ -1,5 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
+interface Props {
+	children: React.ReactNode;
+}
+
+const ModalOverlay = ({ children }: Props) => {
+	return <OverlayStyle>{children}</OverlayStyle>;
+};
+
+export default ModalOverlay;
 
 const OverlayStyle = styled.div`
 	position: fixed;
@@ -20,13 +29,3 @@ const OverlayStyle = styled.div`
 		}
 	}
 `;
-
-interface Props {
-	children: React.ReactNode;
-}
-
-const ModalOverlay = ({ children }: Props) => {
-	return <OverlayStyle>{children}</OverlayStyle>;
-};
-
-export default ModalOverlay;

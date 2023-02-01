@@ -1,22 +1,15 @@
-import {
-	Container,
-	CloseButton,
-	Button,
-	LabelTitle,
-	InputTitle,
-	Content,
-} from '../../style/modalStyle';
+import { Container } from '../../style/modalStyle';
 import ReactDOM from 'react-dom';
 import Backdrop from '../Modal/Backdrop';
 import ModalOverlay from '../Modal/ModalOverlay';
 import { Xmark } from '@styled-icons/fa-solid';
-import { Subtitle } from '../../style/authStyle';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import useFireStore from '../../hooks/useFireStore';
 import { useDispatch } from 'react-redux';
 import { modalActions } from '../../store/modalSlice';
+import { HelperText } from '../../style/authStyle';
 
 const portalElement = document.getElementById('overlays') as HTMLElement;
 
@@ -47,9 +40,15 @@ const ToDoCreate = () => {
 
 	const submitToDo = async () => {
 		if (newContent.title.length <= 0) {
-			setIsFailed({ ...isFailed, checkTitle: true });
+			setIsFailed({
+				checkTitle: true,
+				checkContent: false,
+			});
 		} else if (newContent.content.length <= 0) {
-			setIsFailed({ ...isFailed, checkContent: true });
+			setIsFailed({
+				checkTitle: false,
+				checkContent: true,
+			});
 		} else {
 			addDocument({
 				userId,
@@ -66,25 +65,31 @@ const ToDoCreate = () => {
 			{ReactDOM.createPortal(
 				<ModalOverlay>
 					<Container>
-						<CloseButton
+						<button
 							onClick={() => dispatch(modalActions.handleCreateModal(false))}
 						>
 							<Xmark width={40} height={40} />
-						</CloseButton>
-						{/* 아이콘 */}
-						<Subtitle>할 일 작성하기</Subtitle>
-						<LabelTitle htmlFor="title">제목</LabelTitle>
-						<InputTitle
+						</button>
+						<div>할 일 작성하기</div>
+						<label htmlFor="title">제목</label>
+						<input
 							type="text"
 							id="name"
 							name="title"
 							onBlur={handleTodoContent}
 						/>
-						<LabelTitle htmlFor="title">내용</LabelTitle>
-						<Content id="textarea" name="content" onBlur={handleTodoContent} />
-						<Button type="submit" onClick={submitToDo}>
+						<label htmlFor="title">내용</label>
+						<textarea id="textarea" name="content" onBlur={handleTodoContent} />
+						<HelperText isWrong={isFailed.checkTitle}>
+							제목을 입력해주세요.
+						</HelperText>
+						<HelperText isWrong={isFailed.checkContent}>
+							내용을 입력해주세요.
+						</HelperText>
+
+						<button type="submit" onClick={submitToDo}>
 							확인
-						</Button>
+						</button>
 					</Container>
 				</ModalOverlay>,
 				portalElement

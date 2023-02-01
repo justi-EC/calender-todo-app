@@ -8,13 +8,11 @@ import { authActions } from '../store/authSlice';
 import {
 	Container,
 	SubContainer,
-	Label,
 	Subtitle,
 	LoginInput,
 	LoginButton,
 	IconButton,
 	HelperText,
-	ChangePageText,
 } from '../style/authStyle';
 import { useDispatch } from 'react-redux';
 
@@ -73,7 +71,7 @@ const Login = () => {
 				<Subtitle>나만의 투두리스트</Subtitle>
 				<form>
 					<SubContainer>
-						<Label htmlFor="email">이메일 아이디</Label>
+						<label htmlFor="email">이메일 아이디</label>
 						<LoginInput
 							type="email"
 							id="email"
@@ -84,7 +82,7 @@ const Login = () => {
 							placeholder="example@example.com"
 						/>
 
-						<Label htmlFor="password">비밀번호</Label>
+						<label htmlFor="password">비밀번호</label>
 						<LoginInput
 							type={visiblePwd ? 'text' : 'password'}
 							id="password"
@@ -118,7 +116,7 @@ const Login = () => {
 				</HelperText>
 
 				<Link to="/signup" style={{ textDecoration: 'none' }}>
-					<ChangePageText>회원가입하러 가기</ChangePageText>
+					<p>회원가입하러 가기</p>
 				</Link>
 			</Container>
 		</section>

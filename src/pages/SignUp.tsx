@@ -6,13 +6,11 @@ import { Link } from 'react-router-dom';
 import {
 	Container,
 	SubContainer,
-	Label,
 	Subtitle,
 	SignUpInput,
 	SignUpButton,
 	IconButton,
 	HelperText,
-	ChangePageText,
 } from '../style/authStyle';
 import { useDispatch } from 'react-redux';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
@@ -86,7 +84,7 @@ const SignUp = () => {
 					<Subtitle>만나서 반가워요!</Subtitle>
 
 					<SubContainer>
-						<Label htmlFor="name">이름</Label>
+						<label htmlFor="name">이름</label>
 						<SignUpInput
 							type="text"
 							id="name"
@@ -96,7 +94,7 @@ const SignUp = () => {
 							placeholder="2글자 이상"
 						/>
 
-						<Label htmlFor="email">이메일 주소</Label>
+						<label htmlFor="email">이메일 주소</label>
 						<SignUpInput
 							type="email"
 							id="email"
@@ -106,7 +104,7 @@ const SignUp = () => {
 							placeholder="example@example.com"
 						/>
 
-						<Label htmlFor="password">비밀번호</Label>
+						<label htmlFor="password">비밀번호</label>
 						<SignUpInput
 							type={visiblePwd ? 'text' : 'password'}
 							value={password}
@@ -137,7 +135,7 @@ const SignUp = () => {
 					<HelperText isWrong={isWrong}>이미 존재하는 계정입니다.</HelperText>
 
 					<Link to="/" style={{ textDecoration: 'none' }}>
-						<ChangePageText>로그인 페이지로 이동</ChangePageText>
+						<p>로그인 페이지로 이동</p>
 					</Link>
 				</Container>
 			</main>

@@ -9,41 +9,9 @@ interface ContainerProps {
 	sameDay: boolean;
 	clickDay: boolean;
 }
-
 interface Props {
 	day: Date;
 }
-
-const Container = styled.div<ContainerProps>`
-	border: 1px solid lightgray;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	&:hover {
-		background-color: lightgray;
-		cursor: pointer;
-	}
-
-	p {
-		padding: 5px;
-		color: ${({ sameMonth }) => (sameMonth ? 'black' : 'lightgray')};
-		${({ sameDay }) =>
-			sameDay
-				? css`
-						font-weight: bold;
-						color: var(--primary-color-800);
-				  `
-				: css``}
-		${({ clickDay }) =>
-			clickDay
-				? css`
-						font-weight: bold;
-
-						color: #ff8295;
-				  `
-				: css``}
-	}
-`;
 
 const AllDay = ({ day }: Props) => {
 	const clickedDate = useSelector((state: RootState) => state.date.click);
@@ -80,3 +48,34 @@ const AllDay = ({ day }: Props) => {
 };
 
 export default AllDay;
+
+const Container = styled.div<ContainerProps>`
+	border: 1px solid lightgray;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	&:hover {
+		background-color: lightgray;
+		cursor: pointer;
+	}
+
+	p {
+		padding: 5px;
+		color: ${({ sameMonth }) => (sameMonth ? 'black' : 'lightgray')};
+		${({ sameDay }) =>
+			sameDay
+				? css`
+						font-weight: bold;
+						color: var(--primary-color-800);
+				  `
+				: css``}
+		${({ clickDay }) =>
+			clickDay
+				? css`
+						font-weight: bold;
+
+						color: #ff8295;
+				  `
+				: css``}
+	}
+`;

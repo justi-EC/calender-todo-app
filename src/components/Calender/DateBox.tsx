@@ -5,13 +5,6 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { weekNames } from './Today';
 
-const Container = styled.div`
-	width: 100%;
-	flex: 1;
-	display: grid;
-	grid-template-columns: repeat(7, 1fr);
-`;
-
 const monthList = (nowDate: Date) => {
 	const result: Date[] = [];
 	const nowYear = nowDate.getFullYear();
@@ -55,3 +48,10 @@ const DateBox = () => {
 };
 
 export default DateBox;
+
+const Container = styled.div`
+	width: 100%;
+	flex: 1;
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+`;

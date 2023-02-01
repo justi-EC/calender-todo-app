@@ -4,36 +4,6 @@ import { RootState } from '../../store';
 import { useDispatch } from 'react-redux';
 import { dateActions } from '../../store/dateSlice';
 
-const Container = styled.div`
-	height: 15%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-`;
-
-const BtnBox = styled.div`
-	button {
-		border: 0;
-		margin: 0;
-		background-color: white;
-		width: 30px;
-		margin: 30px;
-		font-weight: bold;
-
-		&:hover {
-			background-color: lightgray;
-			border-radius: 30px;
-		}
-		&:active {
-			background-color: gray;
-		}
-	}
-`;
-
-const CurrentDate = styled.h1`
-	color: var(--primary-color-800);
-`;
-
 const ControlDate = () => {
 	const nowDate = useSelector((state: RootState) => state.date.now);
 	const dispatch = useDispatch();
@@ -68,3 +38,33 @@ const ControlDate = () => {
 };
 
 export default ControlDate;
+
+const Container = styled.div`
+	height: 15%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+`;
+
+const BtnBox = styled.div`
+	button {
+		border: 0;
+		margin: 0;
+		background-color: white;
+		width: 30px;
+		margin: 30px;
+		font-weight: bold;
+
+		&:hover {
+			background-color: lightgray;
+			border-radius: 30px;
+		}
+		&:active {
+			background-color: gray;
+		}
+	}
+`;
+
+const CurrentDate = styled.h1`
+	color: var(--primary-color-800);
+`;

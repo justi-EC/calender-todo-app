@@ -1,5 +1,11 @@
 import styled from 'styled-components';
 
+const Backdrop = () => {
+	return <BackdropStyle />;
+};
+
+export default Backdrop;
+
 const BackdropStyle = styled.div`
 	position: fixed;
 	top: 0;
@@ -9,9 +15,3 @@ const BackdropStyle = styled.div`
 	z-index: 20;
 	background-color: rgba(0, 0, 0, 0.5);
 `;
-
-const Backdrop = () => {
-	return <BackdropStyle />;
-};
-
-export default Backdrop;

@@ -6,6 +6,19 @@ const Container = styled.div`
 	justify-content: center;
 	align-items: center;
 	height: 90vh;
+
+	label {
+		margin-left: 0.8rem;
+		color: var(--primary-color-500);
+	}
+
+	p {
+		color: var(--primary-color-700);
+		transition-duration: 0.3s;
+		&:hover {
+			color: var(--primary-color-900);
+		}
+	}
 `;
 
 const SubContainer = styled.div`
@@ -13,11 +26,6 @@ const SubContainer = styled.div`
 	border: 1px solid var(--primary-color-300);
 	border-radius: 50px;
 	padding-top: 1.8em;
-`;
-
-const Label = styled.label`
-	margin-left: 0.8rem;
-	color: var(--primary-color-500);
 `;
 
 const Subtitle = styled.div`
@@ -149,18 +157,9 @@ const HelperText = styled.p<{ isWrong: boolean }>`
 	display: ${(props) => (props.isWrong ? 'block' : 'none')};
 `;
 
-const ChangePageText = styled.p`
-	color: var(--primary-color-700);
-	transition-duration: 0.3s;
-	&:hover {
-		color: var(--primary-color-900);
-	}
-`;
-
 export {
 	Container,
 	SubContainer,
-	Label,
 	Subtitle,
 	SignUpInput,
 	LoginInput,
@@ -169,5 +168,4 @@ export {
 	Button,
 	IconButton,
 	HelperText,
-	ChangePageText,
 };

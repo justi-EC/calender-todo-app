@@ -1,10 +1,4 @@
-import {
-	ToDoHeader,
-	ToDoTitle,
-	IconButton,
-	UserName,
-	WelcomeText,
-} from '../style/mainStyle';
+import { ToDoHeader, UserHeader } from '../style/mainStyle';
 import { Menu } from '@styled-icons/boxicons-regular/Menu';
 import { useState, useEffect } from 'react';
 import MenuNav from './MenuNav';
@@ -95,14 +89,15 @@ const ToDoPage = () => {
 	return (
 		<>
 			<ToDoHeader>
-				<ToDoTitle>나의 할 일</ToDoTitle>
-
-				<IconButton onClick={toggleMenu}>
+				<h1>나의 할 일</h1>
+				<button onClick={toggleMenu}>
 					<Menu width={80} height={80} />
-				</IconButton>
+				</button>
 			</ToDoHeader>
-			<UserName>{userName}님</UserName>
-			<WelcomeText>반갑습니다!</WelcomeText>
+			<UserHeader>
+				<strong>{userName}님</strong>
+				<div>반갑습니다!</div>
+			</UserHeader>
 
 			{documents &&
 				documents.map((item: DocumentData, index: number) => {
