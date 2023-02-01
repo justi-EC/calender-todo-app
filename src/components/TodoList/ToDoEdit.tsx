@@ -48,13 +48,11 @@ const ToDoEdit = ({ onClose, contentId }: Props) => {
 				checkTitle: true,
 				checkContent: false,
 			});
-			console.log(isFailed);
 		} else if (todoData.content.length <= 0) {
 			setIsFailed({
 				checkTitle: false,
 				checkContent: true,
 			});
-			console.log(isFailed);
 		} else {
 			updateDocument(contentId, todoData);
 			onClose();

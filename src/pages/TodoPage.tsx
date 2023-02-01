@@ -50,6 +50,7 @@ const ToDoPage = () => {
 	);
 	const userName = useSelector((state: RootState) => state.auth.userName);
 	const user = useSelector((state: RootState) => state.auth.user);
+	let userId = '';
 
 	const toggleMenu = () => {
 		setIsMenuToggled(!isMenuToggled);
@@ -67,7 +68,10 @@ const ToDoPage = () => {
 
 	type QueryType = [string, WhereFilterOp, string];
 
-	const userId = user!.uid;
+	if (user !== null) {
+		userId = user.uid;
+	}
+
 	const myQuery: QueryType = ['userId', '==', userId];
 
 	const getData = async () => {
