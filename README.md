@@ -9,3 +9,6 @@
 
 4.수정
 ![todo 수정](https://user-images.githubusercontent.com/108607378/218794873-6b6c85b6-3171-4ee6-9e97-1dc2c38e995e.gif)
+
+5.삭제
+![1](https://user-images.githubusercontent.com/108607378/218796504-acf0d4d2-f824-467e-b169-2718ff530266.png)
