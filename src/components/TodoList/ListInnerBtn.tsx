@@ -6,7 +6,12 @@ import { useDispatch } from 'react-redux';
 import { modalActions } from '../../store/modalSlice';
 import ToDoEdit from './ToDoEdit';
 
-const ListInnerBtn = ({ contentId, createdTime }: DocumentData) => {
+const ListInnerBtn = ({
+	contentId,
+	createdTime,
+	title,
+	content,
+}: DocumentData) => {
 	const [open, setOpen] = useState(false);
 	const [editOpen, setEditOpen] = useState(false);
 	const dispatch = useDispatch();
@@ -41,7 +46,12 @@ const ListInnerBtn = ({ contentId, createdTime }: DocumentData) => {
 					<ToDoDelete onClose={handleClose} contentId={contentId} />
 				) : null}
 				{editOpen === true ? (
-					<ToDoEdit onClose={handleEditClose} contentId={contentId} />
+					<ToDoEdit
+						onClose={handleEditClose}
+						contentId={contentId}
+						title={title}
+						content={content}
+					/>
 				) : null}
 			</BtnWrapper>
 		</>
@@ -53,7 +63,7 @@ export default ListInnerBtn;
 const BtnWrapper = styled.div`
 	display: flex;
 	position: relative;
-	left: 50rem;
+	left: 51rem;
 	margin-bottom: 2rem;
 
 	div:first-child {

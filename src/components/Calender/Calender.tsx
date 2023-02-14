@@ -9,7 +9,6 @@ import { useDispatch } from 'react-redux';
 import { modalActions } from '../../store/modalSlice';
 
 const portalElement = document.getElementById('overlays') as HTMLElement;
-
 const Calender = () => {
 	const dispatch = useDispatch();
 
@@ -36,12 +35,12 @@ const Calender = () => {
 
 export default Calender;
 
-const Container = styled.div`
+export const Container = styled.div`
 	width: 600px;
 	height: 700px;
 	position: absolute;
 	top: 50%;
-	left: 50%;
+	left: 35%;
 	padding: 1rem;
 	transform: translate(-50%, -50%);
 	background-color: white;
@@ -49,6 +48,7 @@ const Container = styled.div`
 	border-radius: 10px;
 	filter: drop-shadow(0 0 25px rgb(0 0 0 / 0.4));
 `;
+
 const CloseButton = styled.button`
 	position: absolute;
 	right: 10px;

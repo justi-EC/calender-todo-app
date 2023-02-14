@@ -18,10 +18,12 @@ import {
 import Calender from '../components/Calender/Calender';
 import { useNavigate } from 'react-router';
 import { useSelector } from 'react-redux';
-import { RootState } from '../store';
+import { RootState } from '../store/store';
 import { signOut } from 'firebase/auth';
 import { authActions } from '../store/authSlice';
 import { useDispatch } from 'react-redux';
+import { docActions } from '../store/docSlice';
+import SubCalender from '../components/Calender/SubCalender';
 
 const ToDoPage = () => {
 	const [isMenuToggled, setIsMenuToggled] = useState(false);
@@ -42,6 +44,7 @@ const ToDoPage = () => {
 	const deleteModalState = useSelector(
 		(state: RootState) => state.handleModal.delete
 	);
+	const doc = useSelector((state: RootState) => state.doc.doc);
 	const userName = useSelector((state: RootState) => state.auth.userName);
 	const user = useSelector((state: RootState) => state.auth.user);
 	let userId = '';
@@ -60,11 +63,10 @@ const ToDoPage = () => {
 		}
 	};
 
-	type QueryType = [string, WhereFilterOp, string];
-
 	if (user !== null) {
 		userId = user.uid;
 	}
+	type QueryType = [string, WhereFilterOp, string];
 
 	const myQuery: QueryType = ['userId', '==', userId];
 
@@ -80,6 +82,7 @@ const ToDoPage = () => {
 			result.push({ ...doc.data(), id: doc.id });
 		});
 		setDocuments(result);
+		dispatch(docActions.setDocument(result));
 	};
 
 	useEffect(() => {
@@ -116,7 +119,11 @@ const ToDoPage = () => {
 
 			{createModalState && <ToDoCreate />}
 
-			{calModalState && <Calender />}
+			{calModalState && (
+				<>
+					<Calender /> <SubCalender />
+				</>
+			)}
 		</>
 	);
 };

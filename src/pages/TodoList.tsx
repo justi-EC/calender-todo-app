@@ -28,7 +28,12 @@ const ToDoList = ({ title, content, contentId, createdTime }: DocumentData) => {
 					<div ref={childRef}>{content}</div>
 				</ContentsWrapper>
 			</Container>
-			<ListInnerBtn contentId={contentId} createdTime={createdTime} />
+			<ListInnerBtn
+				contentId={contentId}
+				createdTime={createdTime}
+				title={title}
+				content={content}
+			/>
 		</>
 	);
 };
@@ -37,7 +42,7 @@ export default ToDoList;
 
 const Container = styled.div`
 	max-width: 1200px;
-	margin: 0.3rem;
+	margin-left: 2rem;
 	border: 1px solid lightgray;
 	border-radius: 20px;
 	padding: 1em;

@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import styled, { css } from 'styled-components';
-import { RootState } from '../../store';
+import { RootState } from '../../store/store';
 import { useDispatch } from 'react-redux';
 import { dateActions } from '../../store/dateSlice';
 

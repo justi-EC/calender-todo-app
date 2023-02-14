@@ -11,14 +11,10 @@ const Container = styled.div`
 		margin-left: 0.8rem;
 		color: var(--primary-color-500);
 	}
+`;
 
-	p {
-		color: var(--primary-color-700);
-		transition-duration: 0.3s;
-		&:hover {
-			color: var(--primary-color-900);
-		}
-	}
+const PrimaryText = styled.p`
+	color: var(--primary-color-700);
 `;
 
 const SubContainer = styled.div`
@@ -168,4 +164,5 @@ export {
 	Button,
 	IconButton,
 	HelperText,
+	PrimaryText,
 };

@@ -5,13 +5,11 @@ import ModalOverlay from '../Modal/ModalOverlay';
 import { Xmark } from '@styled-icons/fa-solid';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../store';
+import { RootState } from '../../store/store';
 import useFireStore from '../../hooks/useFireStore';
 import { useDispatch } from 'react-redux';
 import { modalActions } from '../../store/modalSlice';
 import { HelperText } from '../../style/authStyle';
-
-const portalElement = document.getElementById('overlays') as HTMLElement;
 
 const ToDoCreate = () => {
 	const dispatch = useDispatch();
@@ -58,6 +56,8 @@ const ToDoCreate = () => {
 			dispatch(modalActions.handleCreateModal(false));
 		}
 	};
+
+	const portalElement = document.getElementById('overlays') as HTMLElement;
 
 	return (
 		<>

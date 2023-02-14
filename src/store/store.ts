@@ -3,6 +3,7 @@ import authSlice from './authSlice';
 import fireStoreSlice from './fireStoreSlice';
 import modalSlice from './modalSlice';
 import dateSlice from './dateSlice';
+import docSlice from './docSlice';
 
 const store = configureStore({
 	reducer: {
@@ -10,9 +11,10 @@ const store = configureStore({
 		firestore: fireStoreSlice.reducer,
 		handleModal: modalSlice.reducer,
 		date: dateSlice.reducer,
+		doc: docSlice.reducer,
 	},
-	middleware: (getDefaultMiddeware) =>
-		getDefaultMiddeware({ serializableCheck: false }),
+	middleware: (getDefaultMiddleware) =>
+		getDefaultMiddleware({ serializableCheck: false }),
 });
 
 export default store;

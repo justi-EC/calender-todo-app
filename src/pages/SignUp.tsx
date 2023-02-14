@@ -11,6 +11,7 @@ import {
 	SignUpButton,
 	IconButton,
 	HelperText,
+	PrimaryText,
 } from '../style/authStyle';
 import { useDispatch } from 'react-redux';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
@@ -135,7 +136,7 @@ const SignUp = () => {
 					<HelperText isWrong={isWrong}>이미 존재하는 계정입니다.</HelperText>
 
 					<Link to="/" style={{ textDecoration: 'none' }}>
-						<p>로그인 페이지로 이동</p>
+						<PrimaryText>로그인 페이지로 이동</PrimaryText>
 					</Link>
 				</Container>
 			</main>

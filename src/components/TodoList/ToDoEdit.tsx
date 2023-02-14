@@ -12,9 +12,11 @@ const portalElement = document.getElementById('overlays') as HTMLElement;
 interface Props {
 	onClose: () => void;
 	contentId: string;
+	title: string;
+	content: string;
 }
 
-const ToDoEdit = ({ onClose, contentId }: Props) => {
+const ToDoEdit = ({ onClose, contentId, title, content }: Props) => {
 	const { updateDocument } = useFireStore('Todos');
 	const [todoData, setTodoData] = useState({
 		title: '',
@@ -24,6 +26,8 @@ const ToDoEdit = ({ onClose, contentId }: Props) => {
 		checkTitle: false,
 		checkContent: false,
 	});
+	const [titleState, setTitleState] = useState(title);
+	const [contentState, setContentState] = useState(content);
 
 	const handleEditTodo = (
 		e:
@@ -32,6 +36,8 @@ const ToDoEdit = ({ onClose, contentId }: Props) => {
 	) => {
 		const { name, value } = e.target;
 		setTodoData({ ...todoData, [name]: value });
+		e.target.name === 'title' && setTitleState(e.target.value);
+		e.target.name === 'content' && setContentState(e.target.value);
 	};
 
 	const submitToDo = async (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -68,10 +74,16 @@ const ToDoEdit = ({ onClose, contentId }: Props) => {
 							type="text"
 							id="name"
 							name="title"
+							value={titleState}
 							onChange={handleEditTodo}
 						/>
 						<label htmlFor="title">내용</label>
-						<textarea id="textarea" name="content" onChange={handleEditTodo} />
+						<textarea
+							id="textarea"
+							name="content"
+							value={contentState}
+							onChange={handleEditTodo}
+						/>
 						<HelperText isWrong={isFailed.checkTitle}>
 							제목을 입력해주세요.
 						</HelperText>

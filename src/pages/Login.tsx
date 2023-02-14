@@ -13,6 +13,7 @@ import {
 	LoginButton,
 	IconButton,
 	HelperText,
+	PrimaryText,
 } from '../style/authStyle';
 import { useDispatch } from 'react-redux';
 
@@ -67,7 +68,6 @@ const Login = () => {
 	return (
 		<section>
 			<Container>
-				{/* 아이콘 */}
 				<Subtitle>나만의 투두리스트</Subtitle>
 				<form>
 					<SubContainer>
@@ -116,7 +116,7 @@ const Login = () => {
 				</HelperText>
 
 				<Link to="/signup" style={{ textDecoration: 'none' }}>
-					<p>회원가입하러 가기</p>
+					<PrimaryText>회원가입하러 가기</PrimaryText>
 				</Link>
 			</Container>
 		</section>

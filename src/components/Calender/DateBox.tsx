@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import WeekBox from './WeekBox';
 import AllDay from './AllDay';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../store';
+import { RootState } from '../../store/store';
 import { weekNames } from './Today';
 
 const monthList = (nowDate: Date) => {
