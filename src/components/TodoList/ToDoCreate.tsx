@@ -1,4 +1,3 @@
-import { Container } from '../../style/modalStyle';
 import ReactDOM from 'react-dom';
 import Backdrop from '../Modal/Backdrop';
 import ModalOverlay from '../Modal/ModalOverlay';
@@ -9,7 +8,8 @@ import { RootState } from '../../store/store';
 import useFireStore from '../../hooks/useFireStore';
 import { useDispatch } from 'react-redux';
 import { modalActions } from '../../store/modalSlice';
-import { HelperText } from '../../style/authStyle';
+import { HelperText } from '../../pages/Login';
+import styled from 'styled-components';
 
 const ToDoCreate = () => {
 	const dispatch = useDispatch();
@@ -87,9 +87,9 @@ const ToDoCreate = () => {
 							내용을 입력해주세요.
 						</HelperText>
 
-						<button type="submit" onClick={submitToDo}>
+						<SubmitButton type="submit" onClick={submitToDo}>
 							확인
-						</button>
+						</SubmitButton>
 					</Container>
 				</ModalOverlay>,
 				portalElement
@@ -99,3 +99,77 @@ const ToDoCreate = () => {
 };
 
 export default ToDoCreate;
+
+export const SubmitButton = styled.button`
+	color: ${({ theme }) => theme.colors.primaryBlue700};
+	font-size: 1.2rem;
+	font-weight: bold;
+	position: absolute;
+	right: 20px;
+	top: 550px;
+`;
+
+export const Container = styled.div`
+	width: 20rem;
+	height: 30rem;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	padding: 1rem;
+	transform: translate(-50%, -50%);
+	background-color: white;
+	border-radius: 10px;
+	filter: drop-shadow(0 0 25px rgb(0 0 0 / 0.4));
+
+	button:first-child {
+		position: absolute;
+		right: 10px;
+		top: 10px;
+		opacity: 70%;
+		transition-duration: 0.2s;
+		&:hover {
+			opacity: 100%;
+		}
+	}
+
+	label {
+		display: block;
+		font-size: 1.2rem;
+		color: ${({ theme }) => theme.colors.gray300};
+	}
+
+	input {
+		display: block;
+		width: 70%;
+		margin-bottom: 1.5rem;
+		border: 0;
+		border-bottom: 1px solid ${({ theme }) => theme.colors.gray100};
+		font-size: 1.3rem;
+		color: ${({ theme }) => theme.colors.gray300};
+
+		&:focus {
+			border-bottom: 2px solid ${({ theme }) => theme.colors.primaryBlue500};
+		}
+	}
+
+	textarea {
+		width: 100%;
+		height: 55%;
+		padding: 0.4rem;
+		margin: 1rem 0;
+		border: solid 1px ${({ theme }) => theme.colors.gray100};
+		border-radius: 5px;
+		font-size: 1.3rem;
+		color: ${({ theme }) => theme.colors.gray300};
+		&:focus {
+			border: 2px solid ${({ theme }) => theme.colors.primaryBlue500};
+		}
+	}
+
+	div {
+		font-size: 1.5rem;
+		font-weight: bold;
+		margin-bottom: 1rem;
+		color: ${({ theme }) => theme.colors.primaryBlue700};
+	}
+`;

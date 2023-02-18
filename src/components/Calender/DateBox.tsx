@@ -50,7 +50,7 @@ const DateBox = () => {
 export default DateBox;
 
 const Container = styled.div`
-	width: 100%;
+	height: 80%;
 	flex: 1;
 	display: grid;
 	grid-template-columns: repeat(7, 1fr);

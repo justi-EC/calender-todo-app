@@ -3,20 +3,20 @@ import { useState } from 'react';
 import { Visibility } from '@styled-icons/material-outlined/Visibility';
 import { VisibilityOff } from '@styled-icons/material/VisibilityOff';
 import { Link } from 'react-router-dom';
-import {
-	Container,
-	SubContainer,
-	Subtitle,
-	SignUpInput,
-	SignUpButton,
-	IconButton,
-	HelperText,
-	PrimaryText,
-} from '../style/authStyle';
+import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { appAuth } from '../firebase/config';
 import { authActions } from '../store/authSlice';
+import {
+	Button,
+	Container,
+	HelperText,
+	IconButton,
+	Input,
+	SubContainer,
+	Subtitle,
+} from './Login';
 
 const SignUp = () => {
 	const checkEmail =
@@ -81,7 +81,6 @@ const SignUp = () => {
 		<>
 			<main>
 				<Container>
-					{/* 아이콘 */}
 					<Subtitle>만나서 반가워요!</Subtitle>
 
 					<SubContainer>
@@ -136,7 +135,7 @@ const SignUp = () => {
 					<HelperText isWrong={isWrong}>이미 존재하는 계정입니다.</HelperText>
 
 					<Link to="/" style={{ textDecoration: 'none' }}>
-						<PrimaryText>로그인 페이지로 이동</PrimaryText>
+						<h1>로그인 페이지로 이동</h1>
 					</Link>
 				</Container>
 			</main>
@@ -145,3 +144,44 @@ const SignUp = () => {
 };
 
 export default SignUp;
+
+type SignUpType = {
+	emptyEmail: boolean;
+	emptyPwd: boolean;
+	emptyNickName: boolean;
+};
+
+const SignUpInput = styled(Input)<{
+	validProps: boolean;
+	isActive: SignUpType;
+}>`
+	background-color: ${({ validProps, isActive, theme }) =>
+		validProps ||
+		(isActive.emptyEmail && isActive.emptyPwd && isActive.emptyNickName)
+			? theme.colors.correct
+			: theme.colors.incorrect};
+`;
+
+const SignUpButton = styled(Button)<{ isActive: SignUpType }>`
+	${({ disabled, isActive, theme }) =>
+		(disabled ||
+			isActive.emptyEmail ||
+			isActive.emptyPwd ||
+			isActive.emptyNickName) &&
+		`
+		background-color:white;
+		border:1px solid ${theme.colors.gray100};
+		border-radius: 1.2rem;
+		color:${theme.colors.gray100};
+		`};
+	${({ theme, disabled, isActive }) =>
+		!disabled &&
+		!isActive.emptyEmail &&
+		!isActive.emptyPwd &&
+		!isActive.emptyNickName &&
+		`
+		&:hover{
+			background-color : ${theme.colors.primaryBlue800};
+		}
+	`};
+`;

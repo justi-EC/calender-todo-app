@@ -1,19 +1,18 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import SignUp from './pages/SignUp';
-import Login from './pages/Login';
-import TodoPage from './pages/ToDoPage';
-import SignUpSuccess from './pages/SignUpSuccess';
+import { ThemeProvider } from 'styled-components';
+import Router from './router';
+import GlobalStyle from './style/globalStyle';
+import theme from './style/theme';
+import { Provider } from 'react-redux';
+import store from './store/store';
 
 function App() {
 	return (
-		<BrowserRouter>
-			<Routes>
-				<Route path="/" element={<Login />} />
-				<Route path="/signup" element={<SignUp />} />
-				<Route path="/todopage" element={<TodoPage />} />
-				<Route path="/signupsuccess" element={<SignUpSuccess />} />
-			</Routes>
-		</BrowserRouter>
+		<Provider store={store}>
+			<ThemeProvider theme={theme}>
+				<GlobalStyle />
+				<Router />
+			</ThemeProvider>
+		</Provider>
 	);
 }
 

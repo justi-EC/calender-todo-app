@@ -4,17 +4,8 @@ import { VisibilityOff } from '@styled-icons/material/VisibilityOff';
 import { Link, useNavigate } from 'react-router-dom';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { appAuth } from '../firebase/config';
+import styled from 'styled-components';
 import { authActions } from '../store/authSlice';
-import {
-	Container,
-	SubContainer,
-	Subtitle,
-	LoginInput,
-	LoginButton,
-	IconButton,
-	HelperText,
-	PrimaryText,
-} from '../style/authStyle';
 import { useDispatch } from 'react-redux';
 
 const Login = () => {
@@ -116,7 +107,7 @@ const Login = () => {
 				</HelperText>
 
 				<Link to="/signup" style={{ textDecoration: 'none' }}>
-					<PrimaryText>회원가입하러 가기</PrimaryText>
+					<h1>회원가입하러 가기</h1>
 				</Link>
 			</Container>
 		</section>
@@ -124,3 +115,101 @@ const Login = () => {
 };
 
 export default Login;
+
+type LoginType = {
+	emptyEmail: boolean;
+	emptyPwd: boolean;
+};
+
+export const Container = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+
+	label {
+		margin-left: 0.8rem;
+		color: ${({ theme }) => theme.colors.primaryBlue700};
+	}
+
+	h1 {
+		color: ${({ theme }) => theme.colors.primaryBlue700};
+	}
+`;
+
+export const Subtitle = styled.div`
+	font-size: 2.5rem;
+	font-weight: 500;
+	margin-bottom: 1rem;
+	color: ${({ theme }) => theme.colors.primaryBlue700};
+`;
+
+export const SubContainer = styled.div`
+	width: 20rem;
+
+	border: 1px solid ${({ theme }) => theme.colors.primaryBlue300};
+	border-radius: 50px;
+	padding-top: 1.8rem;
+`;
+
+export const Input = styled.input`
+	font-size: 1rem;
+	padding: 0.5rem;
+	margin: 0.5rem;
+	width: 95%;
+	border-radius: 1.2rem;
+	&::placeholder {
+		color: ${({ theme }) => theme.colors.gray100};
+	}
+`;
+
+export const Button = styled.button`
+	width: 20rem;
+	padding: 0.5em;
+	background-color: ${({ theme }) => theme.colors.primaryBlue700};
+	border: 1px solid white;
+	margin: 2rem 0 0.5rem 0;
+	border-radius: 1.2rem;
+	color: white;
+	transition-duration: 0.3s;
+`;
+
+const LoginInput = styled(Input)<{ validProps: boolean; isActive: LoginType }>`
+	background-color: ${({ validProps, isActive, theme }) =>
+		validProps || (isActive.emptyEmail && isActive.emptyPwd)
+			? theme.colors.correct
+			: theme.colors.incorrect};
+`;
+
+const LoginButton = styled(Button)<{ isActive: LoginType }>`
+	${({ disabled, isActive, theme }) =>
+		(disabled || isActive.emptyEmail || isActive.emptyPwd) &&
+		`
+      background-color: white;
+      border: 1px solid ${theme.colors.gray100};
+      color: ${theme.colors.gray100};
+    `};
+
+	${({ theme, disabled, isActive }) =>
+		(!disabled || !isActive.emptyEmail || !isActive.emptyPwd) &&
+		`
+      &:hover {
+        background-color: ${theme.colors.primaryBlue800};
+      }
+    `};
+`;
+
+export const IconButton = styled.button`
+	position: relative;
+	bottom: 2.4rem;
+	left: 17rem;
+	opacity: 40%;
+`;
+
+export const HelperText = styled.h2<{ isWrong: boolean }>`
+	color: ${({ theme }) => theme.colors.error};
+	margin: 0.7rem;
+	margin-bottom: 1rem;
+	visibility: ${({ isWrong }) => (isWrong ? 'visible' : 'hidden')};
+`;

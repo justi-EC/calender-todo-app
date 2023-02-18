@@ -1,4 +1,3 @@
-import { ToDoHeader, UserHeader } from '../style/mainStyle';
 import { Menu } from '@styled-icons/boxicons-regular/Menu';
 import { useState, useEffect } from 'react';
 import MenuNav from './MenuNav';
@@ -24,6 +23,8 @@ import { authActions } from '../store/authSlice';
 import { useDispatch } from 'react-redux';
 import { docActions } from '../store/docSlice';
 import SubCalender from '../components/Calender/SubCalender';
+import styled from 'styled-components';
+import useMediaQuery from '../hooks/useMediaQuery';
 
 const ToDoPage = () => {
 	const [isMenuToggled, setIsMenuToggled] = useState(false);
@@ -44,7 +45,6 @@ const ToDoPage = () => {
 	const deleteModalState = useSelector(
 		(state: RootState) => state.handleModal.delete
 	);
-	const doc = useSelector((state: RootState) => state.doc.doc);
 	const userName = useSelector((state: RootState) => state.auth.userName);
 	const user = useSelector((state: RootState) => state.auth.user);
 	let userId = '';
@@ -89,6 +89,8 @@ const ToDoPage = () => {
 		getData();
 	}, [calModalState, createModalState, editModalState, deleteModalState]);
 
+	const isAboveMediumScreens = useMediaQuery('(min-width:1200px)');
+
 	return (
 		<>
 			<ToDoHeader>
@@ -98,7 +100,7 @@ const ToDoPage = () => {
 				</button>
 			</ToDoHeader>
 			<UserHeader>
-				<strong>{userName}님</strong>
+				<h1>{userName}님</h1>
 				<div>반갑습니다!</div>
 			</UserHeader>
 
@@ -121,7 +123,8 @@ const ToDoPage = () => {
 
 			{calModalState && (
 				<>
-					<Calender /> <SubCalender />
+					<Calender />
+					{isAboveMediumScreens && <SubCalender />}
 				</>
 			)}
 		</>
@@ -129,3 +132,34 @@ const ToDoPage = () => {
 };
 
 export default ToDoPage;
+
+const ToDoHeader = styled.header`
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-right: 2rem;
+	opacity: 70%;
+
+	h1 {
+		display: inline-block;
+		margin: 1.5rem;
+		font-size: 5rem;
+		font-weight: 500;
+		color: ${({ theme }) => theme.colors.primaryBlue700};
+	}
+`;
+
+const UserHeader = styled.div`
+	h1 {
+		margin-left: 1.8rem;
+		font-size: 2.5rem;
+		color: ${({ theme }) => theme.colors.gray300};
+	}
+
+	div {
+		margin-left: 1.8rem;
+		margin-bottom: 2rem;
+		font-size: 2rem;
+		color: ${({ theme }) => theme.colors.gray100};
+	}
+`;

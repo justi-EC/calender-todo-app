@@ -14,11 +14,10 @@ const WeekBox = ({ weekName }: Props) => {
 export default WeekBox;
 
 const Container = styled.div`
-	background-color: var(--primary-color-700);
-	border: none;
+	background-color: ${({ theme }) => theme.colors.primaryBlue700};
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	color: white;
-	font-weight: bold;
+	font-weight: 500;
 `;

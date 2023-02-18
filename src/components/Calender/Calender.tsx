@@ -36,11 +36,11 @@ const Calender = () => {
 export default Calender;
 
 export const Container = styled.div`
-	width: 600px;
-	height: 700px;
+	width: 30rem;
+	height: 35rem;
 	position: absolute;
 	top: 50%;
-	left: 35%;
+	left: 38%;
 	padding: 1rem;
 	transform: translate(-50%, -50%);
 	background-color: white;
@@ -53,7 +53,9 @@ const CloseButton = styled.button`
 	position: absolute;
 	right: 10px;
 	top: 10px;
-	background-color: transparent;
-	cursor: pointer;
-	border: none;
+	opacity: 70%;
+	transition-duration: 0.2s;
+	&:hover {
+		opacity: 100%;
+	}
 `;

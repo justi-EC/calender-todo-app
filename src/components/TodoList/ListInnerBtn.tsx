@@ -63,21 +63,22 @@ export default ListInnerBtn;
 const BtnWrapper = styled.div`
 	display: flex;
 	position: relative;
-	left: 51rem;
-	margin-bottom: 2rem;
+	left: 50rem;
+	margin: 1rem 0;
 
 	div:first-child {
-		color: var(--primary-color-700);
+		color: ${({ theme }) => theme.colors.primaryBlue700};
 	}
 
 	div:nth-child(n + 2) {
 		width: 40px;
 		height: 40px;
-		margin-left: 10px;
+		margin-left: 5px;
 		text-align: center;
-		color: darkgray;
+		color: ${({ theme }) => theme.colors.gray500};
+		transition: 0.2s;
 		&:hover {
-			color: var(--primary-color-700);
+			color: ${({ theme }) => theme.colors.primaryBlue700};
 			cursor: pointer;
 		}
 	}

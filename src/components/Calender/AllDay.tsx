@@ -50,23 +50,24 @@ const AllDay = ({ day }: Props) => {
 export default AllDay;
 
 const Container = styled.div<ContainerProps>`
-	border: 1px solid lightgray;
+	border: 1px solid ${({ theme }) => theme.colors.gray100};
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	&:hover {
-		background-color: lightgray;
+		background-color: ${({ theme }) => theme.colors.primaryBlue100};
 		cursor: pointer;
 	}
 
 	p {
 		padding: 5px;
-		color: ${({ sameMonth }) => (sameMonth ? 'black' : 'lightgray')};
+		color: ${({ sameMonth, theme }) =>
+			sameMonth ? 'black' : `${theme.colors.gray100}`};
 		${({ sameDay }) =>
 			sameDay
 				? css`
 						font-weight: bold;
-						color: var(--primary-color-800);
+						color: ${({ theme }) => theme.colors.primaryBlue800};
 				  `
 				: css``}
 		${({ clickDay }) =>

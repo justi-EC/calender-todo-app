@@ -12,9 +12,9 @@ const MenuNav = ({ toggle, logout }: Props) => {
 
 	return (
 		<Nav>
-			<div onClick={toggle}>
+			<button onClick={toggle}>
 				<Xmark width={40} height={40} />
-			</div>
+			</button>
 			<div onClick={() => dispatch(modalActions.handleCreateModal(true))}>
 				새 리스트 작성
 			</div>
@@ -34,7 +34,7 @@ const Nav = styled.div`
 	bottom: 0;
 	height: 100%;
 	width: 300px;
-	background-color: var(--primary-color-800);
+	background-color: ${({ theme }) => theme.colors.primaryBlue800};
 	filter: drop-shadow(0 0 25px rgb(0 0 0 / 0.2));
 	animation: slide 200ms ease-out forwards;
 
@@ -49,31 +49,28 @@ const Nav = styled.div`
 		}
 	}
 
-	div:first-child {
+	button {
 		margin: 2rem;
-		cursor: pointer;
-		background-color: transparent;
-		border: none;
 		opacity: 70%;
-		transition-duration: 0.3s;
+		transition-duration: 0.2s;
 
 		&:hover {
 			opacity: 100%;
 		}
 	}
 
-	div:nth-child(n + 2) {
+	div:nth-child(n) {
 		display: flex;
 		justify-content: center;
 		padding: 3rem;
-		color: #ffffff;
+		color: white;
 		font-size: 25px;
 		font-weight: bold;
 		cursor: pointer;
-		transition-duration: 0.3s;
+		transition-duration: 0.2s;
 
 		&:hover {
-			background-color: var(--primary-color-900);
+			background-color: ${({ theme }) => theme.colors.primaryBlue900};
 		}
 	}
 `;

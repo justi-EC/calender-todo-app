@@ -5,7 +5,6 @@ import { DocumentData } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { Container } from './Calender';
 import ReactDOM from 'react-dom';
-import Backdrop from '../Modal/Backdrop';
 import ModalOverlay from '../Modal/ModalOverlay';
 
 const SubCalender = () => {
@@ -52,30 +51,31 @@ const SubCalender = () => {
 export default SubCalender;
 
 const SubContainer = styled(Container)`
-	width: 340px;
-	left: 70%;
+	width: 17rem;
+	left: 62%;
 `;
 
 const ContentWrapper = styled.div`
-	width: 340px;
-	height: 650px;
+	width: 15rem;
+	height: 30rem;
 	overflow: auto;
 `;
 
 const Title = styled.div`
 	display: flex;
 	justify-content: center;
-	color: var(--primary-color-700);
+	color: ${({ theme }) => theme.colors.primaryBlue700};
 	margin-bottom: 1rem;
 `;
 
 const Content = styled.div`
 	margin-bottom: 2rem;
-	border: 2px solid var(--primary-color-500);
+	border: 2px solid ${({ theme }) => theme.colors.primaryBlue500};
 	border-radius: 10px;
 	padding: 1rem;
 
 	div:first-child {
-		color: var(--primary-color-700);
+		color: ${({ theme }) => theme.colors.primaryBlue700};
+		margin-bottom: 0.5rem;
 	}
 `;

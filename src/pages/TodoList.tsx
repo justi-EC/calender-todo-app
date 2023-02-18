@@ -41,9 +41,9 @@ const ToDoList = ({ title, content, contentId, createdTime }: DocumentData) => {
 export default ToDoList;
 
 const Container = styled.div`
-	max-width: 1200px;
-	margin-left: 2rem;
-	border: 1px solid lightgray;
+	max-width: 1230px;
+	margin: 0 1.5rem;
+	border: 1px solid ${({ theme }) => theme.colors.gray100};
 	border-radius: 20px;
 	padding: 1em;
 	cursor: pointer;
@@ -57,7 +57,8 @@ const Container = styled.div`
 		margin-bottom: 2px;
 		vertical-align: super;
 		font-size: 3rem;
-		color: var(--primary-color-800);
+		font-weight: 500;
+		color: ${({ theme }) => theme.colors.primaryBlue800};
 	}
 `;
 
@@ -71,6 +72,6 @@ const ContentsWrapper = styled.div`
 		display: inline-block;
 		margin: 0;
 		font-size: 2rem;
-		color: #616161;
+		color: ${({ theme }) => theme.colors.gray300};
 	}
 `;

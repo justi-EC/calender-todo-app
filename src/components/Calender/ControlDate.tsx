@@ -40,7 +40,7 @@ const ControlDate = () => {
 export default ControlDate;
 
 const Container = styled.div`
-	height: 15%;
+	height: 20%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -48,23 +48,22 @@ const Container = styled.div`
 
 const BtnBox = styled.div`
 	button {
-		border: 0;
-		margin: 0;
-		background-color: white;
 		width: 30px;
 		margin: 30px;
 		font-weight: bold;
 
 		&:hover {
-			background-color: lightgray;
+			background-color: ${({ theme }) => theme.colors.gray100};
 			border-radius: 30px;
 		}
 		&:active {
-			background-color: gray;
+			background-color: ${({ theme }) => theme.colors.gray300};
 		}
 	}
 `;
 
 const CurrentDate = styled.h1`
-	color: var(--primary-color-800);
+	font-size: 30px;
+	font-weight: 500;
+	color: ${({ theme }) => theme.colors.primaryBlue800};
 `;

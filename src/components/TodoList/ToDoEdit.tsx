@@ -1,11 +1,11 @@
-import { Container } from '../../style/modalStyle';
 import ReactDOM from 'react-dom';
 import Backdrop from '../Modal/Backdrop';
 import ModalOverlay from '../Modal/ModalOverlay';
 import { Xmark } from '@styled-icons/fa-solid';
-import { HelperText } from '../../style/authStyle';
 import { useState } from 'react';
 import useFireStore from '../../hooks/useFireStore';
+import { HelperText } from '../../pages/Login';
+import { Container, SubmitButton } from './ToDoCreate';
 
 const portalElement = document.getElementById('overlays') as HTMLElement;
 
@@ -91,9 +91,9 @@ const ToDoEdit = ({ onClose, contentId, title, content }: Props) => {
 							내용을 입력해주세요.
 						</HelperText>
 
-						<button type="submit" onClick={submitToDo}>
+						<SubmitButton type="submit" onClick={submitToDo}>
 							확인
-						</button>
+						</SubmitButton>
 					</Container>
 				</ModalOverlay>,
 				portalElement
