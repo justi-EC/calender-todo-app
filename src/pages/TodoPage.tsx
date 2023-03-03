@@ -28,7 +28,6 @@ import useMediaQuery from '../hooks/useMediaQuery';
 
 const ToDoPage = () => {
 	const [isMenuToggled, setIsMenuToggled] = useState(false);
-	const [documents, setDocuments] = useState<DocumentData>();
 
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
@@ -45,9 +44,8 @@ const ToDoPage = () => {
 	const deleteModalState = useSelector(
 		(state: RootState) => state.handleModal.delete
 	);
-	const userName = useSelector((state: RootState) => state.auth.userName);
+	const documents = useSelector((state: RootState) => state.doc.doc);
 	const user = useSelector((state: RootState) => state.auth.user);
-	let userId = '';
 
 	const toggleMenu = () => {
 		setIsMenuToggled(!isMenuToggled);
@@ -63,26 +61,26 @@ const ToDoPage = () => {
 		}
 	};
 
-	if (user !== null) {
-		userId = user.uid;
-	}
 	type QueryType = [string, WhereFilterOp, string];
 
-	const myQuery: QueryType = ['userId', '==', userId];
-
 	const getData = async () => {
-		const q: Query<DocumentData> = query(
-			collection(appFireStore, 'Todos'),
-			where(...myQuery),
-			orderBy('createdTime', 'desc')
-		);
-		const res = await getDocs(q);
-		let result: DocumentData = [];
-		res.docs.forEach((doc) => {
-			result.push({ ...doc.data(), id: doc.id });
-		});
-		setDocuments(result);
-		dispatch(docActions.setDocument(result));
+		if (user) {
+			const myQuery: QueryType = ['userId', '==', user.uid];
+			const q: Query<DocumentData> = query(
+				collection(appFireStore, 'Todos'),
+				where(...myQuery),
+				orderBy('createdTime', 'desc')
+			);
+			const res = await getDocs(q);
+			let result: DocumentData = [];
+			res.docs.forEach((doc) => {
+				result.push({ ...doc.data(), id: doc.id });
+			});
+			dispatch(docActions.setDocument(result));
+		} else {
+			alert('로그인 후 이용해주세요.');
+			navigate('/');
+		}
 	};
 
 	useEffect(() => {
@@ -100,7 +98,7 @@ const ToDoPage = () => {
 				</button>
 			</ToDoHeader>
 			<UserHeader>
-				<h1>{userName}님</h1>
+				<h1>{user?.displayName}님</h1>
 				<div>반갑습니다!</div>
 			</UserHeader>
 

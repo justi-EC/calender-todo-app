@@ -42,19 +42,19 @@ const ToDoEdit = ({ onClose, contentId, title, content }: Props) => {
 
 	const submitToDo = async (e: React.MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault();
-		if (todoData.title.length <= 0) {
+		if (titleState.length <= 0) {
 			setIsFailed({
 				checkTitle: true,
 				checkContent: false,
 			});
-		} else if (todoData.content.length <= 0) {
+		} else if (contentState.length <= 0) {
 			setIsFailed({
 				checkTitle: false,
 				checkContent: true,
 			});
 		} else {
-			updateDocument(contentId, todoData);
 			onClose();
+			updateDocument(contentId, { title: titleState, content: contentState });
 		}
 	};
 
@@ -67,7 +67,6 @@ const ToDoEdit = ({ onClose, contentId, title, content }: Props) => {
 						<button onClick={onClose}>
 							<Xmark width={40} height={40} />
 						</button>
-						{/* 아이콘 */}
 						<div>내용 수정하기</div>
 						<label htmlFor="title">제목</label>
 						<input

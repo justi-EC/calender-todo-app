@@ -48,7 +48,6 @@ const Login = () => {
 		try {
 			const res = await signInWithEmailAndPassword(appAuth, email, password);
 			const user = res.user;
-			dispatch(authActions.userName(user.displayName));
 			dispatch(authActions.login(user));
 			navigate('/todopage');
 		} catch (error: any) {
@@ -175,7 +174,10 @@ export const Button = styled.button`
 	transition-duration: 0.3s;
 `;
 
-const LoginInput = styled(Input)<{ validProps: boolean; isActive: LoginType }>`
+const LoginInput = styled(Input)<{
+	validProps: boolean;
+	isActive: LoginType;
+}>`
 	background-color: ${({ validProps, isActive, theme }) =>
 		validProps || (isActive.emptyEmail && isActive.emptyPwd)
 			? theme.colors.correct

@@ -52,7 +52,8 @@ export default SubCalender;
 
 const SubContainer = styled(Container)`
 	width: 17rem;
-	left: 62%;
+	left: 65%;
+	transform: translate(-50%, -50%);
 `;
 
 const ContentWrapper = styled.div`

@@ -40,13 +40,20 @@ export const Container = styled.div`
 	height: 35rem;
 	position: absolute;
 	top: 50%;
-	left: 38%;
+	left: 35%;
 	padding: 1rem;
 	transform: translate(-50%, -50%);
 	background-color: white;
 	border: none;
 	border-radius: 10px;
 	filter: drop-shadow(0 0 25px rgb(0 0 0 / 0.4));
+
+	@media (max-width: 768px) {
+		left: 50%;
+	}
+	@media (max-width: 1024px) {
+		left: 50%;
+	}
 `;
 
 const CloseButton = styled.button`
